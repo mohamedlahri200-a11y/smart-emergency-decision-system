@@ -1,0 +1,159 @@
+{
+  "n_patients": 97585,
+  "n_features": 29,
+  "missing_values_total": 0,
+  "duplicate_rows": 0,
+  "target_distributions": {
+    "triage_priority": {
+      "Orange": 27676,
+      "Rouge": 22040,
+      "Jaune": 18213,
+      "Vert": 17756,
+      "Bleu": 11900
+    },
+    "service": {
+      "Urgence_Generale": 35320,
+      "Cardiologie": 22834,
+      "Pneumologie": 12799,
+      "Reanimation": 12401,
+      "Orthopedie": 9213,
+      "Neurologie": 5018
+    },
+    "vital_emergency": {
+      "Aucune": 69533,
+      "Detresse_Respiratoire": 10837,
+      "AVC": 5018,
+      "Sepsis": 4793,
+      "Infarctus": 4621,
+      "Choc": 2783
+    },
+    "deterioration_risk": {
+      "Faible": 39826,
+      "Modere": 22920,
+      "Critique": 22040,
+      "Eleve": 12799
+    },
+    "clinical_profile": {
+      "Non_urgent_Vert": 17756,
+      "Consultation_simple_Bleu": 11900,
+      "Douleur_thoracique_NS": 10170,
+      "Traumatisme": 9213,
+      "HTA": 8043,
+      "COVID": 6787,
+      "Asthme": 6012,
+      "Diabete_decompense": 5664,
+      "AVC": 5018,
+      "Detresse_respiratoire": 4825,
+      "Sepsis": 4793,
+      "IDM": 4621,
+      "Polytraumatisme": 2783
+    }
+  },
+  "vital_signs_statistics": {
+    "age": {
+      "count": 97585.0,
+      "mean": 50.87,
+      "std": 23.04,
+      "min": 1.0,
+      "25%": 33.0,
+      "50%": 52.0,
+      "75%": 70.0,
+      "max": 95.0
+    },
+    "temperature": {
+      "count": 97585.0,
+      "mean": 37.14,
+      "std": 0.81,
+      "min": 34.1,
+      "25%": 36.7,
+      "50%": 36.9,
+      "75%": 37.3,
+      "max": 41.6
+    },
+    "frequence_cardiaque": {
+      "count": 97585.0,
+      "mean": 93.31,
+      "std": 20.18,
+      "min": 35.0,
+      "25%": 78.0,
+      "50%": 91.0,
+      "75%": 106.0,
+      "max": 199.0
+    },
+    "pression_arterielle_systolique": {
+      "count": 97585.0,
+      "mean": 123.41,
+      "std": 29.76,
+      "min": 50.0,
+      "25%": 106.0,
+      "50%": 119.0,
+      "75%": 134.0,
+      "max": 260.0
+    },
+    "pression_arterielle_diastolique": {
+      "count": 97585.0,
+      "mean": 77.02,
+      "std": 17.11,
+      "min": 30.0,
+      "25%": 67.0,
+      "50%": 76.0,
+      "75%": 85.0,
+      "max": 152.0
+    },
+    "frequence_respiratoire": {
+      "count": 97585.0,
+      "mean": 19.74,
+      "std": 5.6,
+      "min": 6.0,
+      "25%": 15.0,
+      "50%": 18.0,
+      "75%": 23.0,
+      "max": 47.0
+    },
+    "saturation_o2": {
+      "count": 97585.0,
+      "mean": 95.25,
+      "std": 4.06,
+      "min": 74.2,
+      "25%": 93.1,
+      "50%": 96.6,
+      "75%": 98.3,
+      "max": 100.0
+    },
+    "glycemie": {
+      "count": 97585.0,
+      "mean": 1.29,
+      "std": 0.76,
+      "min": 0.3,
+      "25%": 0.92,
+      "50%": 1.12,
+      "75%": 1.38,
+      "max": 6.0
+    },
+    "score_news2": {
+      "count": 97585.0,
+      "mean": 4.02,
+      "std": 4.19,
+      "min": 0.0,
+      "25%": 0.0,
+      "50%": 3.0,
+      "75%": 7.0,
+      "max": 18.0
+    },
+    "score_esi": {
+      "count": 97585.0,
+      "mean": 3.28,
+      "std": 1.75,
+      "min": 1.0,
+      "25%": 1.0,
+      "50%": 4.0,
+      "75%": 5.0,
+      "max": 5.0
+    }
+  },
+  "minority_class_ratio": {
+    "target_triage_priority": 0.43,
+    "target_service": 0.142,
+    "target_deterioration_risk": 0.321
+  }
+}

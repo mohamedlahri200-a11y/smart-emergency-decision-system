@@ -1,0 +1,63 @@
+# =========================
+# IntelliJ IDEA
+# =========================
+.idea/
+*.iml
+
+# =========================
+# VS Code
+# =========================
+.vscode/
+
+# =========================
+# Spring Boot / Maven
+# =========================
+app-backend/target/
+*.class
+
+# =========================
+# React / Node
+# =========================
+app-fronted/node_modules/
+app-fronted/dist/
+app-fronted/.vite/
+node_modules/
+
+# =========================
+# Python
+# =========================
+ai-microservice/venv/
+ai-microservice/__pycache__/
+ai-microservice/**/*.pyc
+__pycache__/
+*.pyc
+
+# =========================
+# Environment / Secrets
+# =========================
+.env
+.env.*
+!.env.example
+
+# =========================
+# Logs
+# =========================
+*.log
+
+# =========================
+# OS
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# Machine Learning models
+# =========================
+saved_models/
+ai-microservice/saved_models/
+
+# =========================
+# Temporary files
+# =========================
+*.tmp
+*.temp
