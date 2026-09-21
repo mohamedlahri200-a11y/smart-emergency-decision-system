@@ -9,6 +9,19 @@ on:
 jobs:
   build-backend:
     runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: rootpassword
+          MYSQL_DATABASE: app_backend
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h localhost"
+          --health-interval=5s
+          --health-timeout=5s
+          --health-retries=10
     steps:
       - name: Récupérer le code
         uses: actions/checkout@v4
@@ -22,6 +35,11 @@ jobs:
 
       - name: Build + tests
         working-directory: ./app-backend
+        env:
+          SPRING_DATASOURCE_URL: jdbc:mysql://localhost:3306/app_backend?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+          SPRING_DATASOURCE_USERNAME: root
+          SPRING_DATASOURCE_PASSWORD: rootpassword
+          JWT_SECRET: ci_test_secret_key_1234567890_uniquement_pour_pipeline
         run: ./mvnw clean verify
 
   build-ai:
