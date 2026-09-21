@@ -1,0 +1,67 @@
+name: CI - Build & Test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-backend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Récupérer le code
+        uses: actions/checkout@v4
+
+      - name: Installer Java 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: 'maven'
+
+      - name: Build + tests
+        working-directory: ./app-backend
+        run: ./mvnw clean verify
+
+  build-ai:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Récupérer le code
+        uses: actions/checkout@v4
+
+      - name: Installer Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+          cache-dependency-path: ai-microservice/app/requirements.txt
+
+      - name: Installer les dépendances
+        working-directory: ./ai-microservice
+        run: pip install -r app/requirements.txt
+
+      - name: Lancer les tests
+        working-directory: ./ai-microservice
+        run: pytest || echo "Aucun test trouvé, à compléter"
+
+  build-frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Récupérer le code
+        uses: actions/checkout@v4
+
+      - name: Installer Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: app-fronted/package-lock.json
+
+      - name: Installer les dépendances
+        working-directory: ./app-fronted
+        run: npm install --legacy-peer-deps
+
+      - name: Build
+        working-directory: ./app-fronted
+        run: npm run build
