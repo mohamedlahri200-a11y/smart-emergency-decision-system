@@ -60,4 +60,5 @@ ai-microservice/saved_models/
 # Temporary files
 # =========================
 *.tmp
-*.temp
+*.tempactions-runner/
+actions-runner-linux-x64-2.337.0.tar.gz
