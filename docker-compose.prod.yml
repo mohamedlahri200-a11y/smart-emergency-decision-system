@@ -1,0 +1,71 @@
+services:
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: app_backend
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks:
+      - smart-emergency-net
+
+  ai-microservice:
+    image: ghcr.io/mohamedlahri200-a11y/smart-emergency-ai:latest
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/docs')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    networks:
+      - smart-emergency-net
+
+  app-backend:
+    image: ghcr.io/mohamedlahri200-a11y/smart-emergency-backend:latest
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/app_backend?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=${DB_ROOT_PASSWORD}
+      - JWT_SECRET=${JWT_SECRET}
+    healthcheck:
+      test: ["CMD-SHELL", "bash -c 'exec 3<>/dev/tcp/localhost/8080'"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    depends_on:
+      db:
+        condition: service_healthy
+      ai-microservice:
+        condition: service_started
+    ports:
+      - "8080:8080"
+    networks:
+      - smart-emergency-net
+
+  app-fronted:
+    image: ghcr.io/mohamedlahri200-a11y/smart-emergency-frontend:latest
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://127.0.0.1/"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+    ports:
+      - "5173:80"
+    depends_on:
+      app-backend:
+        condition: service_healthy
+    networks:
+      - smart-emergency-net
+
+volumes:
+  mysql_data:
+
+networks:
+  smart-emergency-net:
